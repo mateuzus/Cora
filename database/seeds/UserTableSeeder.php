@@ -13,13 +13,6 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        $user = \App\Entities\User::create([
-            'name' => 'Thiago Dionizio',
-            'email' => 'thiago.dionizio@includetecnologia.com.br',
-            'password' => bcrypt('Thiago0010341'),
-            'email_verified_at' => now(),
-        ]);
-        $user->roles()->sync([1]);
 
         $user = \App\Entities\User::create([
             'name' => 'Mateus Marcelino',
