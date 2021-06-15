@@ -1,0 +1,24 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic');
+@import "variables";
+@import '~@fortawesome/fontawesome-free/css/all.css';
+// OverlayScrollbars
+@import '~overlayscrollbars/css/OverlayScrollbars.css';
+// iCheck
+@import '~icheck-bootstrap/icheck-bootstrap.css';
+// AdminLTE
+@import '../../vendor/almasaeed2010/adminlte/dist/css/adminlte.css';
+// Bootstrap
+// Already imported by AdminLTE
+//@import '~bootstrap/scss/bootstrap';
+@import "~icheck/skins/square/red.css";
+
+.sidebar-dark-lightblue .nav-sidebar > .nav-item > .nav-link.active,
+.sidebar-light-lightblue .nav-sidebar > .nav-item > .nav-link.active {
+    background-color: #4682b4;
+    color: #ffffff;
+}
+.bg-light-blue{
+    background-color: #4682b4;
+    color: white;
+}

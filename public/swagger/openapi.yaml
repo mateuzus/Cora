@@ -1,0 +1,286 @@
+openapi: 3.0.0
+info:
+  title: 'API DE EXECUÇÃO DO MUFFATO'
+  version: '1.0'
+paths:
+  /api/v1/login:
+    post:
+      tags:
+        - Autenticação
+      summary: 'Retorna um usuário autenticado com seus recursos e token'
+      description: 'Retorna usuário, perfil, token, rede, lojas '
+      operationId: 'App\Http\Controllers\Api\ApiAuthController::login'
+      parameters:
+        -
+          name: email
+          in: query
+          description: 'maximum number of results to return'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: '{OK}'
+  /api/v1/logout:
+    post:
+      tags:
+        - Autenticação
+      summary: 'Deloga usuário '
+      description: 'Retorna usuário, perfil, token, rede, lojas '
+      operationId: 'App\Http\Controllers\Api\ApiAuthController::logout'
+      responses:
+        '200':
+          description: '{}'
+  /api/v1/flows:
+    get:
+      tags:
+        - 'Listagem de Fluxos'
+      summary: 'Fluxos Cadastrados'
+      description: 'Retorna todas os fluxos cadastrados'
+      operationId: 'App\Http\Controllers\Api\FlowsController::index'
+      parameters:
+        -
+          name: network_id
+          in: query
+          description: 'id da rede'
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: ''
+  /api/v1/questions:
+    get:
+      tags:
+        - Listas
+      summary: 'Listas de hoje'
+      description: 'Retorna as listas cadastradas no dia de hoje '
+      operationId: 'App\Http\Controllers\Api\ListingController::index'
+      parameters:
+        -
+          name: type
+          in: query
+          description: 'tipo de filas'
+          required: true
+          schema:
+            type: string
+            enum: '[prices, flow_of_work, prices, audits, pops, routines, noncompliances, resupplements]'
+      responses:
+        '200':
+          description: '{''data'':[]}'
+    post:
+      tags:
+        - Pergunta
+      summary: 'Cadastro de Pergunta'
+      description: 'Cadastra uma pergunta '
+      operationId: 'App\Http\Controllers\Api\QuestionController::store'
+      parameters:
+        -
+          name: list_id
+          in: query
+          description: 'id da lista'
+          required: true
+          schema:
+            type: integer
+        -
+          name: description
+          in: query
+          description: 'descrição da pergunta'
+          required: true
+          schema:
+            type: string
+        -
+          name: mandatory
+          in: query
+          description: 'É uma pergunta obrigatória'
+          required: true
+          schema:
+            type: boolean
+        -
+          name: question_status
+          in: query
+          description: 'Status da Pergunta'
+          required: true
+          schema:
+            type: boolean
+        -
+          name: question_type
+          in: query
+          description: 'Tipo da Pergunta'
+          required: true
+          schema:
+            type: string
+        -
+          name: weight_question
+          in: query
+          description: 'Peso da pergunta'
+          required: true
+          schema:
+            type: string
+        -
+          name: has_action
+          in: query
+          description: 'Tem ação'
+          required: true
+          schema:
+            type: boolean
+        -
+          name: link_video
+          in: query
+          description: 'Link de um vídeo'
+          required: false
+          schema:
+            type: string
+        -
+          name: amount
+          in: query
+          description: 'A Quantidade/Preço a ser validada'
+          required: false
+          schema:
+            type: decimal
+      responses:
+        '200':
+          description: '{}'
+  /api/v1/listings:
+    post:
+      tags:
+        - Listas
+      summary: 'Retorna uma lista cadastrada'
+      description: 'Retorna lista'
+      operationId: 'App\Http\Controllers\Api\ListingController::store'
+      parameters:
+        -
+          name: user_id
+          in: query
+          description: 'usuário que irá executar a lista'
+          required: true
+          schema:
+            type: integer
+        -
+          name: description
+          in: query
+          description: 'descrição da lista'
+          required: true
+          schema:
+            type: string
+        -
+          name: creation_date
+          in: query
+          description: 'data de criação da lista'
+          required: true
+          schema:
+            type: string
+        -
+          name: type
+          in: query
+          description: 'tipo de filas, onde determinatá qual será o tipo de fila'
+          required: true
+          schema:
+            type: string
+            enum: '[prices, flow_of_work, prices, audits, pops, routines, noncompliances, resupplements]'
+        -
+          name: status
+          in: query
+          description: 'tags da lista'
+          required: true
+          schema:
+            type: string
+        -
+          name: period_end
+          in: query
+          description: 'fim do periodo da lista'
+          required: true
+          schema:
+            type: string
+        -
+          name: period_start
+          in: query
+          description: 'inicio do periodo da lista'
+          required: true
+          schema:
+            type: string
+        -
+          name: list_tag
+          in: query
+          description: 'tags da lista para auxiliar na pesquisa'
+          required: true
+          schema:
+            type: string
+        -
+          name: pop_id
+          in: query
+          description: 'id do pop a ser cadastrado'
+          required: false
+          schema:
+            type: string
+        -
+          name: routine_id
+          in: query
+          description: 'id da rotina a ser cadastrada'
+          required: false
+          schema:
+            type: string
+        -
+          name: flow_id
+          in: query
+          description: 'id do fluxo a ser cadastrado'
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: ''
+  /api/v1/pops:
+    get:
+      tags:
+        - 'Listagem de POPS'
+      summary: 'Pops Cadastrados'
+      description: 'Retorna todas os pops cadastrados'
+      operationId: 'App\Http\Controllers\Api\OperationStandartsController::index'
+      parameters:
+        -
+          name: network_id
+          in: query
+          description: 'id da rede'
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: ''
+  /api/v1/routines:
+    get:
+      tags:
+        - 'Listagem de Rotinas'
+      summary: 'Rotinas Cadastradas'
+      description: 'Retorna todas as rotinas cadastradas '
+      operationId: 'App\Http\Controllers\Api\RoutinesController::index'
+      parameters:
+        -
+          name: network_id
+          in: query
+          description: 'id da rede'
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: ''
+  /api/v1/users:
+    get:
+      tags:
+        - 'Listagem de Usuários'
+      summary: 'Retorna um usuário autenticado com seus recursos e token'
+      description: 'Retorna usuário, perfil, token, rede, lojas '
+      operationId: 'App\Http\Controllers\Api\UsersController::index'
+      parameters:
+        -
+          name: network_id
+          in: query
+          description: 'id do usuario de rede'
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: '{''data'':[{''id'':11,''name'':''Gerente de Marketing'',''email'':''gerente_de_marketing@teste.com'',''email_verified_at'':''2021-04-10 12:04:11'',''status'':true,''created_at'':''2021-04-10T15:04:11.000000Z'',''updated_at'':''2021-04-10T15:04:11.000000Z''}]}'
